@@ -19,13 +19,13 @@ const server = module.exports = http.createServer((req, res) => {
     req.on('data', (data)=>{
       var jsonPostData = data.toString();
       var parsedJsonData = JSON.parse(jsonPostData);
+      var stringifiedJsonName = parsedJsonData.name;
       if(!parsedJsonData.name){
         console.log('ERROR!!! No property key of name!!\n POST requests to /greet must be in JSON format\n and they must have a property key of "name"\n')
       } else {
-      var stringifiedJsonName = parsedJsonData.name;
-      res.write(jsonPostData);
-      console.log('whats up?? you JSON verion of: "' + stringifiedJsonName + '" , you...\n');
-    };
+        res.write(jsonPostData);
+        console.log('whats up?? you JSON version of: "' + stringifiedJsonName + '" , you...\n');
+      };
       return res.end();
     });
     return;
