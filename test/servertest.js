@@ -3,9 +3,24 @@ const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
 const expect = chai.expect;
 const request = chai.request;
+const server = require('./../server');
 require(__dirname + '/../server');
 
-describe('tesing my HTTP server', () => {
+describe('testing my HTTP server', () => {
+  before((done) => {
+    server.listen(3000, () => {
+      console.log('server listening on 3000');
+      done();
+    })
+    .on('error', (err) => {
+      console.log(err);
+    });
+  });
+  after(() => {
+    server.close(() => {
+      console.log('closing server');
+    });
+  });
   it('should respond to GET request to /greet/(your name here) with super rad greeting', (done) => {
     request('localhost:3000')
     .get('/greet/jersey')

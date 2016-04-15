@@ -35,8 +35,4 @@ gulp.task('lint:notest', () => {
   .pipe(eslint.format());
 });
 gulp.task('lint', ['lint:notest', 'lint:test']);
-gulp.task('default', ['lint','mochatest'], () => {
-  gulp.watch(['test/servertest.js', files], () => {
-    gulp.run('lint', 'mochatest');
-  });
-});
+gulp.task('default', ['lint','mochatest']);
